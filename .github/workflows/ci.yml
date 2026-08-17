@@ -1,0 +1,32 @@
+# Runs the whole test suite on every push and pull request.
+# If anyone breaks a check, the team sees a red X on GitHub immediately
+# instead of finding out during the demo.
+
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Generate the dataset
+        # The dataset is built by a script rather than committed as binaries,
+        # so CI must regenerate it before the tests can run.
+        run: python tools/make_dataset.py
+
+      - name: Run tests
+        run: python -m pytest tests/ -q

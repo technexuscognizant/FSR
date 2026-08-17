@@ -1,0 +1,20 @@
+# Core engine
+pandas>=2.0.0
+openpyxl>=3.1.0
+
+# API
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+python-multipart>=0.0.9
+pydantic>=2.6.0
+
+# LLM narrative (Gemini via REST — no SDK needed)
+httpx>=0.27.0
+python-dotenv>=1.0.0
+
+# Frontend
+streamlit>=1.33.0
+requests>=2.31.0
+
+# Testing
+pytest>=8.0.0
